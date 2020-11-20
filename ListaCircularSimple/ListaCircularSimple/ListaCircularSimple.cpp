@@ -13,6 +13,7 @@ void insertarNodo(Nodo *&, Nodo *&);
 void mostrarNodo(Nodo *);
 void buscarNodo(Nodo*, int);
 void modificarNodo(Nodo*&, int );
+void eliminarNodo(Nodo*&, Nodo*,int);
 
 int main()
 {
@@ -52,6 +53,9 @@ int main()
 			break;
 		case 4:
 			cout << "\n\n ELIMINAR UN NODO DE LA LISTA \n\n";
+			cout << "Digita el numero:";
+			cin >> n;
+			eliminarNodo(primero,ultimo, n);
 			break;
 		case 5:
 			cout << "\n\n DESPLEGAR LISTA DE NODOS \n\n";
@@ -151,6 +155,46 @@ void modificarNodo(Nodo*& primero, int n) {
 				bandera = false;
 			}
 
+			actual = actual->siguiente;
+		} while (actual != primero && bandera != true);
+		if (bandera != true) {
+			cout << "\n El nodo con el dato " << n << " no ha sido encontrado\n\n";
+		}
+	}
+	else {
+		cout << "\nSe encuentra vacia\n\n";
+	}
+}
+
+void eliminarNodo(Nodo*& primero, Nodo* ultimo,int n) {
+	Nodo* actual = new Nodo();
+	actual = primero;
+	Nodo* anterior = new Nodo();
+	anterior = NULL;
+	bool bandera = false;
+	if (primero != NULL) {
+		do {
+			if (actual->dato == n) {
+				cout << "\n El nodo con el dato " << n << " ha sido encontrado\n\n";
+			
+				if (actual == primero) {
+					primero = primero->siguiente;
+					ultimo->siguiente = primero;
+
+				}
+				else if (actual == ultimo) {
+					//anterior->siguiente = primero;
+					ultimo = anterior;
+				}
+				else {
+					anterior->siguiente = actual->siguiente;
+				}
+
+				cout << "\n Nodo Eliminado";
+				bandera = true;
+			}
+
+			anterior = actual;
 			actual = actual->siguiente;
 		} while (actual != primero && bandera != true);
 		if (bandera != true) {
