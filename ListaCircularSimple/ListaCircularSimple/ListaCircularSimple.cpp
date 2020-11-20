@@ -12,6 +12,7 @@ struct Nodo {
 void insertarNodo(Nodo *&, Nodo *&);
 void mostrarNodo(Nodo *);
 void buscarNodo(Nodo*, int);
+void modificarNodo(Nodo*&, int );
 
 int main()
 {
@@ -45,7 +46,9 @@ int main()
 			break;
 		case 3:
 			cout << "\n\n MODIFICAR UN NODO DE LA LISTA \n\n";
-			//modificarNodo();
+			cout << "Digita el numero:";
+			cin >> n;
+			modificarNodo(primero, n);
 			break;
 		case 4:
 			cout << "\n\n ELIMINAR UN NODO DE LA LISTA \n\n";
@@ -129,4 +132,32 @@ void buscarNodo(Nodo* primero, int n) {
 		cout << "\nSe encuentra vacia\n\n";
 	}
 
+}
+
+void modificarNodo(Nodo*& primero, int n) {
+	Nodo* actual = new Nodo();
+	actual = primero;
+	bool bandera = false;
+	if (primero != NULL) {
+		do {
+			if (actual->dato == n) {
+				cout << "\n El nodo con el dato " << n << " ha sido encontrado\n\n";
+				cout << "\n Ingrese el dato que sustituira el nodo:";
+				cin >> actual->dato;
+				cout << "\n Nodo modificado";
+				bandera = true;
+			}
+			else {
+				bandera = false;
+			}
+
+			actual = actual->siguiente;
+		} while (actual != primero && bandera != true);
+		if (bandera != true) {
+			cout << "\n El nodo con el dato " << n << " no ha sido encontrado\n\n";
+		}
+	}
+	else {
+		cout << "\nSe encuentra vacia\n\n";
+	}
 }
