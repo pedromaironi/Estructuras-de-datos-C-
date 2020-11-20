@@ -11,18 +11,59 @@ struct Nodo {
 
 void insertarNodo(Nodo *&, Nodo *&);
 void mostrarNodo(Nodo *);
+void buscarNodo(Nodo*, int);
 
 int main()
 {
+	int opcion_menu = 0;
 	Nodo* primero = NULL;
 	Nodo* ultimo = NULL;
-	insertarNodo(primero, ultimo);
-	insertarNodo(primero, ultimo);
-	insertarNodo(primero, ultimo);
-	insertarNodo(primero, ultimo);
-	insertarNodo(primero, ultimo);
-	mostrarNodo(primero);
+	do
+	{
+		cout << "\n|-------------------------------------|";
+		cout << "\n|      ° LISTA CIRCULAR SIMPLE °      |";
+		cout << "\n|------------------|------------------|";
+		cout << "\n| 1. Insertar      | 4. Eliminar      |";
+		cout << "\n| 2. Buscar        | 5. Desplegar     |";
+		cout << "\n| 3. Modificar     | 6. Salir         |";
+		cout << "\n|------------------|------------------|";
+		cout << "\n\n Escoja una Opcion: ";
+		cin >> opcion_menu;
+		switch (opcion_menu) {
+		case 1:
+			cout << "\n\n INSERTA NODO EN LA LISTA \n\n";
+			for (int i = 0; i < 5; i++) {
+				insertarNodo(primero, ultimo);
+			}
+			break;
+		case 2:
+			cout << "\n\n BUSCAR UN NODO EN LA LISTA \n\n";
+			int n;
+			cout << "Digita el numero:";
+			cin >> n;
+			buscarNodo(primero, n);
+			break;
+		case 3:
+			cout << "\n\n MODIFICAR UN NODO DE LA LISTA \n\n";
+			//modificarNodo();
+			break;
+		case 4:
+			cout << "\n\n ELIMINAR UN NODO DE LA LISTA \n\n";
+			break;
+		case 5:
+			cout << "\n\n DESPLEGAR LISTA DE NODOS \n\n";
+			mostrarNodo(primero);
+			break;
+		case 6:
+			cout << "\n\n Programa finalizado...";
+			break;
+		default:
+			cout << "\n\n Opcion No Valida \n\n";
+		}
+	} while (opcion_menu != 6);
+
 	return 0;
+	
 }
 
 void insertarNodo(Nodo *&primero, Nodo *&ultimo) {
@@ -58,4 +99,34 @@ void mostrarNodo(Nodo *primero) {
 	else {
 		cout << "\nSe encuentra vacia\n\n";
 	}
+}
+
+void buscarNodo(Nodo* primero, int n) {
+	Nodo* actual = new Nodo();
+	actual = primero;
+	bool bandera = false;
+	if (primero != NULL) {
+
+
+		do {
+			if (actual->dato == n) {
+				bandera = true;
+			}
+			else {
+				bandera = false;
+			}
+
+			actual = actual->siguiente;
+		} while (actual != primero && bandera != true);
+		if (bandera == true) {
+			cout << "\n El nodo con el dato " << n << " ha sido encontrado\n\n";
+		}
+		else {
+			cout << "\n El nodo con el dato " << n << " no ha sido encontrado\n\n";
+		}
+	}
+	else {
+		cout << "\nSe encuentra vacia\n\n";
+	}
+
 }
