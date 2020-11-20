@@ -183,7 +183,7 @@ void eliminarNodo(Nodo*& primero, Nodo* ultimo,int n) {
 
 				}
 				else if (actual == ultimo) {
-					//anterior->siguiente = primero;
+					anterior->siguiente = primero;
 					ultimo = anterior;
 				}
 				else {
